@@ -19,7 +19,7 @@ import * as validate from './validate';
     const version = await validate.getVersion();
 
     core.debug(`Version is ${version}`);
-    await cli.new(version);
+    await cli.new(version, {projects});
 
     if (setCommitsOption !== 'skip') {
       core.debug(`Setting commits with option '${setCommitsOption}'`);
@@ -34,7 +34,7 @@ import * as validate from './validate';
           const localProjects: [string] = [project];
           const sourceMapOptions = {
             include: sourcemaps,
-            // projects: localProjects,
+            projects: localProjects,
             urlPrefix,
           };
           return cli.uploadSourceMaps(version, sourceMapOptions);
