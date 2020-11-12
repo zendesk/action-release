@@ -155,7 +155,7 @@ export const getProjects = (): string[] => {
       'Environment variable SENTRY_PROJECT is missing a project slug and no projects are specified with the "projects" option'
     );
   }
-  return [project];
+  return [project.trim()];
 };
 
 export const getUrlPrefixOption = (): string => {
