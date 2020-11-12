@@ -140,6 +140,7 @@ export const checkEnvironmentVariables = (): void => {
 
 export const getProjects = (): string[] => {
   const projectsOption = core.getInput('projects') || '';
+  console.log('optino', projectsOption);
   const projects = projectsOption
     .split(' ')
     .map(proj => proj.trim())
@@ -148,6 +149,7 @@ export const getProjects = (): string[] => {
     return projects;
   }
   const project = process.env['SENTRY_PROJECT'];
+  console.log('project', project)
   if (!project) {
     throw Error(
       'Environment variable SENTRY_PROJECT is missing a project slug and no projects are specified with the "projects" option'
