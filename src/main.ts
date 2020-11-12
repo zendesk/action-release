@@ -37,6 +37,7 @@ import * as validate from './validate';
             projects: localProjects,
             urlPrefix,
           };
+          print("sourcemaps", sourcemaps)
           return cli.uploadSourceMaps(version, sourceMapOptions);
         })
       );
