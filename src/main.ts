@@ -26,7 +26,7 @@ import * as validate from './validate';
       await cli.setCommits(version, {auto: true});
     }
 
-    if (sourcemaps) {
+    if (sourcemaps.length) {
       core.debug(`Adding sourcemaps`);
       await Promise.all(
         projects.map(async project => {
@@ -43,11 +43,13 @@ import * as validate from './validate';
       );
     }
 
-    core.debug(`Adding deploy to release`);
-    await cli.newDeploy(version, {
-      env: environment,
-      ...(deployStartedAtOption && {started: deployStartedAtOption}),
-    });
+    if (environment) {
+      core.debug(`Adding deploy to release`);
+      await cli.newDeploy(version, {
+        env: environment,
+        ...(deployStartedAtOption && {started: deployStartedAtOption}),
+      });
+    }
 
     core.debug(`Finalizing the release`);
     if (shouldFinalize) {

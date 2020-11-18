@@ -1,7 +1,7 @@
 # Sentry Release GitHub Action
 Automatically create a Sentry release in a workflow. 
 
-A release is a version of your code that is deployed to an environment. When you give Sentry information about your releases, you unlock a number of new features:
+A release is a version of your code that can be deployed to an environment. When you give Sentry information about your releases, you unlock a number of new features:
  - Determine the issues and regressions introduced in a new release
  - Predict which commit caused an issue and who is likely responsible
  - Resolve issues by including the issue number in your commit message
@@ -46,13 +46,15 @@ The following are all _required_.
 #### Parameters
 |name|description|default|
 |---|---|---|
-|`environment`|_Required_. Set the environment for this release. E.g. "production" or "staging".|-|
+|`environment`|Set the environment for this release. E.g. "production" or "staging". Omit to skip adding deploy to release.|-|
 |`finalize`|When false, omit marking the release as finalized and released.|`true`|
 |`sourcemaps`|Space-separated list of paths to JavaScript sourcemaps. Omit to skip uploading sourcemaps.|-|
 |`started_at`|Unix timestamp of the release start date. Omit for current time.|-|
 |`version`|Identifier that uniquely identifies the releases. _Note: the `refs/tags/` prefix is automatically stripped when `version` is `github.ref`._|<code>${{&nbsp;github.sha&nbsp;}}</code>|
 |`version_prefix`|Value prepended to auto-generated version. For example "v".|-|
 |`set_commits`|Specify whether to set commits for the release. Either "auto" or "skip".|"auto"|
+|`projects`|Space-separated list of paths of projects. When omitted, falls back to the environment variable `SENTRY_PROJECT` to determine the project.|-|
+|`url_prefix`|Adds a prefix to source map urls after stripping them.|-|
 
 ### Examples
 - Create a new Sentry release for the `production` environment and upload JavaScript source maps from the `./lib` directory.
